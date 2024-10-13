@@ -29,7 +29,7 @@ function App() {
           data-testid="big-card"
         >
           <div className="front">👻</div>
-          <div className="back">{selectedCard}</div>
+          <div className="back">{isFlipped ? selectedCard : ""}</div>
         </div>
         <div className="card-container" data-testid="card-selector">
           {fibonacciSequence.map((number) => (
