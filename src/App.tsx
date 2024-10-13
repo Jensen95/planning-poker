@@ -26,11 +26,12 @@ function App() {
         <div
           className={`big-card ${isFlipped ? "flipped" : ""}`}
           onClick={handleCardClick}
+          data-testid="big-card"
         >
           <div className="front">👻</div>
           <div className="back">{selectedCard}</div>
         </div>
-        <div className="card-container">
+        <div className="card-container" data-testid="card-selector">
           {fibonacciSequence.map((number) => (
             <div
               key={number}
