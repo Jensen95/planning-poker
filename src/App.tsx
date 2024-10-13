@@ -14,6 +14,11 @@ function App() {
     setIsFlipped(!isFlipped);
   };
 
+  const handleCardSelection = (card: string | number) => () => {
+    setIsFlipped(false);
+    setSelectedCard(card);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -30,7 +35,7 @@ function App() {
             <div
               key={number}
               className="card"
-              onClick={() => setSelectedCard(number)}
+              onClick={handleCardSelection(number)}
             >
               {number}
             </div>
