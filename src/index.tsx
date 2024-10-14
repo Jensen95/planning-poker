@@ -1,17 +1,17 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import reportWebVitals from "./reportWebVitals";
+import { reportWebVitals } from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <App />
-  </React.StrictMode>
+  </StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
@@ -19,4 +19,4 @@ root.render(
 // Learn more about service workers: https://cra.link/PWA
 serviceWorkerRegistration.unregister();
 
-reportWebVitals();
+reportWebVitals(console.log);

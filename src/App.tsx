@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 // Fibonacci sequence
 const fibonacciSequence = [0, "½", 1, 2, 3, 5, 8, 13, 21, "∞", "?"];
+type Card = (typeof fibonacciSequence)[number];
 
 function App() {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [selectedCard, setSelectedCard] = useState<string | number | null>(
-    null
-  );
+  const [selectedCard, setSelectedCard] = useState<Card>("?");
 
   const handleCardClick = () => {
     setIsFlipped(!isFlipped);
   };
 
-  const handleCardSelection = (card: string | number) => () => {
+  const handleCardSelection = (card: Card) => () => {
     setIsFlipped(false);
     setSelectedCard(card);
   };
@@ -33,13 +32,13 @@ function App() {
         </div>
         <div className="card-container" data-testid="card-selector">
           {fibonacciSequence.map((number) => (
-            <div
+            <button
               key={number}
               className="card"
               onClick={handleCardSelection(number)}
             >
               {number}
-            </div>
+            </button>
           ))}
         </div>
       </header>
