@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
+import { expect, test } from "vitest";
 
 test("renders a card selector", () => {
   render(<App />);
