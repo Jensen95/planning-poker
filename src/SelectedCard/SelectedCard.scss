@@ -1,5 +1,7 @@
+@use 'sass:string';
+
 @mixin slideIn($rotation: 0deg) {
-  $name: inline-#{unique-id()};
+  $name: inline-#{string.unique-id()};
   @keyframes #{$name} {
     from {
       transform: translateY(-20px) rotateZ($rotation);
@@ -10,7 +12,11 @@
       opacity: 1;
     }
   }
-  transform: rotateZ($rotation);
+
+  & {
+    transform: rotateZ($rotation);
+  }
+
   &:last-child {
     opacity: 0;
     animation: $name 0.3s 0.3s forwards;
@@ -33,11 +39,13 @@
 
 .big-card {
   position: relative;
-  width: 280px;
+  width: 500px;
+  max-width: 75vw;
   aspect-ratio: 1 / 1.5;
-  margin: 20px;
+  margin: 30px;
   perspective: 1000px;
   cursor: pointer;
+  box-sizing: border-box;
 
   .front,
   .back {

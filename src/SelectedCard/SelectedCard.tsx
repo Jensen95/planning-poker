@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
+import type { Card } from '../App'
 
 import './SelectedCard.scss'
 
-export const SelectedCard = ({ selectedCard }: { selectedCard: string | number }) => {
+export const SelectedCard = ({ selectedCard }: { selectedCard: Card }) => {
   const [isFlipped, setIsFlipped] = useState(false)
-  const [shownCards, setShownCards] = useState<(string | number)[]>([])
+  const [shownCards, setShownCards] = useState<Card[]>([])
 
   useEffect(() => {
     setIsFlipped(false)
@@ -33,6 +34,7 @@ export const SelectedCard = ({ selectedCard }: { selectedCard: string | number }
               <div className="back">{isFlipped ? selectedCard : ''}</div>
             </div>
           ) : (
+            // Maybe remember if card is flipped
             <FlippedCard key={`${card}-${cardIndex}`} card={card} />
           )
         })}
@@ -40,7 +42,7 @@ export const SelectedCard = ({ selectedCard }: { selectedCard: string | number }
     </div>
   )
 }
-const FlippedCard = ({ card }: { card: string | number }) => {
+const FlippedCard = ({ card }: { card: Card }) => {
   return (
     <div className="big-card flipped stacked">
       <div className="front">👻</div>

@@ -4,7 +4,7 @@ import { SelectedCard } from './SelectedCard'
 
 // Fibonacci sequence
 const fibonacciSequence = [0, '½', 1, 2, 3, 5, 8, 13, 21, '∞', '?']
-type Card = (typeof fibonacciSequence)[number]
+export type Card = (typeof fibonacciSequence)[number]
 
 function App() {
   const [selectedCard, setSelectedCard] = useState<Card>('?')
