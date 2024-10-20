@@ -17,7 +17,10 @@ export const CardSelectorPanel = ({
   }
 
   return (
-    <div className={`card-selector-panel ${fullSize ? 'full-size' : 'shrink'}`}>
+    <div
+      className={`card-selector-panel ${fullSize ? 'full-size' : 'shrink'}`}
+      data-testid="card-selector-panel"
+    >
       <div className="top-panel">
         <button className="expand-btn" onClick={() => setFullSize(!fullSize)}>
           {fullSize ? '↓' : '↑'}

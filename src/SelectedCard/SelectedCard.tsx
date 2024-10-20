@@ -25,10 +25,10 @@ export const SelectedCard = ({ selectedCard }: { selectedCard: Card }) => {
           const isLastCard = cardIndex === previousCards.length - 1
           return isLastCard ? (
             <div
-              key={`${card}-${cardIndex}`}
+              key={`${card}:${cardIndex}`}
               className={`big-card ${isFlipped ? 'flipped' : ''}`}
               onClick={handleCardClick}
-              data-testid="big-card"
+              data-testid="front-card"
             >
               <div className="front">👻</div>
               <div className="back">{isFlipped ? selectedCard : ''}</div>
@@ -42,6 +42,7 @@ export const SelectedCard = ({ selectedCard }: { selectedCard: Card }) => {
     </div>
   )
 }
+
 const FlippedCard = ({ card }: { card: Card }) => {
   return (
     <div className="big-card flipped stacked">
