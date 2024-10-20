@@ -2,6 +2,7 @@
 
 @mixin slideIn($rotation: 0deg) {
   $name: inline-#{string.unique-id()};
+  // Maybe change the flip animation and slide in to come from above
   @keyframes #{$name} {
     from {
       transform: translateY(-20px) rotateZ($rotation);
