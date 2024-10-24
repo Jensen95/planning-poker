@@ -10,8 +10,9 @@ export const SelectedCard = ({ selectedCard }: { selectedCard: Card }) => {
   const [shownCards, setShownCards] = useState<Card[]>([])
 
   useShake(() => {
+    console.log('shake')
     setIsFlipped((prev) => !prev)
-  })
+  }, selectedCard)
 
   useEffect(() => {
     setIsFlipped(false)
@@ -62,31 +63,38 @@ const getMaxAcceleration = (acceleration: {
   return max
 }
 
-const useShake = (onShake: () => void) => {
+const useShake = (onShake: () => void, card: Card) => {
   const test = useMotion()
   const [shaking, setShaking] = useState(false)
   const [vibrate, setVibrate] = useState(false)
   useVibrate(vibrate, [100, 100, 100, 100], false)
   const [, cancelDebounce] = useDebounce(
     () => {
-      if (shaking) {
-        onShake()
-        setVibrate(true)
-        setShaking(false)
-      }
+      setShaking((prev) => {
+        if (prev) {
+          onShake()
+          setVibrate(true)
+        }
+        return false
+      })
     },
     300,
-    [shaking],
+    [shaking, card],
   )
   // useVibrate(false,)
   const max = getMaxAcceleration(test?.acceleration)
   if (max > 15) {
-    // setVibrate(true)
     if (!shaking) {
       setShaking(true)
       setVibrate(false)
     }
   }
+
+  useEffect(() => {
+    cancelDebounce()
+    setShaking(false)
+    setVibrate(false)
+  }, [card])
 
   return null
 }
