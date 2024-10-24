@@ -67,6 +67,8 @@ const useShake = (onShake: () => void, card: Card) => {
   const test = useMotion()
   const [shaking, setShaking] = useState(false)
   const [vibrate, setVibrate] = useState(false)
+  // Throttle instead of debounce?
+  // Use throttle/debounce on function not value
   useVibrate(vibrate, [100, 100, 100, 100], false)
   const [, cancelDebounce] = useDebounce(
     () => {
