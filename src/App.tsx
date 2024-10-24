@@ -35,6 +35,11 @@ const checkPermission = async () => {
 }
 
 const ShakeButton = () => {
+  const [permissionGranted, setPermissionGranted] = useState(false)
+  const onClick = async () => {
+    const granted = await checkPermission()
+    setPermissionGranted(granted)
+  }
   if (
     !('DeviceMotionEvent' in window) ||
     typeof (DeviceMotionEvent as DME).requestPermission !== 'function'
@@ -42,7 +47,11 @@ const ShakeButton = () => {
     return null
   }
 
-  return <button onClick={checkPermission}>Shake it up?</button>
+  if (permissionGranted) {
+    return null
+  }
+
+  return <button onClick={onClick}>Shake it off?</button>
 }
 
 export default App
