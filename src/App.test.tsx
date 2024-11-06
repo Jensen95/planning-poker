@@ -10,10 +10,11 @@ describe('<App />', () => {
     expect(cardSelectorElement).toBeInTheDocument()
   })
 
-  it('renders a big card', () => {
+  it('renders no big card initially', () => {
     render(<App />)
-    const bigCardElement = screen.getByTestId('front-card')
-    expect(bigCardElement).toBeInTheDocument()
+    const bigCardElement = screen.queryByTestId('front-card')
+
+    expect(bigCardElement).not.toBeInTheDocument()
   })
 
   it('renders a card with a number', () => {
@@ -28,19 +29,18 @@ describe('<App />', () => {
     expect(cardElement).toBeInTheDocument()
   })
 
-  it('renders a card with a question mark', () => {
-    render(<App />)
-    const cardElement = screen.getByText('?')
-    expect(cardElement).toBeInTheDocument()
-  })
-
-  it('when a card is clicked, the big card is flipped', async () => {
+  it('should render a big card showing the back of the card, when a card is selected', async () => {
     render(<App />)
     const cardElement = screen.getByText('8')
     userEvent.click(cardElement)
-    await waitFor(() => {
-      expect(screen.getAllByText('?')).toHaveLength(2)
-    })
+    const bigCardElement = await screen.findByTestId('front-card')
+    expect(bigCardElement).not.toHaveClass('flipped')
+  })
+
+  it('flips the big card when it is clicked', async () => {
+    render(<App />)
+    const cardElement = screen.getByText('8')
+    userEvent.click(cardElement)
     const bigCardElement = await screen.findByTestId('front-card')
     userEvent.click(bigCardElement)
 
