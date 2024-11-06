@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { SelectedCard } from './SelectedCard'
 import { CardSelectorPanel } from './CardSelectorPanel'
@@ -50,6 +50,10 @@ const ShakeButton = () => {
   if (permissionGranted) {
     return null
   }
+
+  useEffect(() => {
+    onClick()
+  }, [])
 
   return <button onClick={onClick}>Shake it off?</button>
 }
