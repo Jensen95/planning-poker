@@ -8,7 +8,7 @@ const fibonacciSequence = [0, '½', 1, 2, 3, 5, 8, 13, 21, '∞', '?']
 export type Card = (typeof fibonacciSequence)[number]
 
 function App() {
-  const [selectedCard, setSelectedCard] = useState<Card>('?')
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null)
 
   return (
     <div className="App">

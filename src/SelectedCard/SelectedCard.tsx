@@ -4,7 +4,7 @@ import type { Card } from '../App'
 import './SelectedCard.scss'
 import { useDebounce, useMotion, useVibrate } from 'react-use'
 
-export const SelectedCard = ({ selectedCard }: { selectedCard: Card }) => {
+export const SelectedCard = ({ selectedCard }: { selectedCard: Card | null }) => {
   const [isFlipped, setIsFlipped] = useState(false)
 
   const [shownCards, setShownCards] = useState<Card[]>([])
@@ -16,7 +16,7 @@ export const SelectedCard = ({ selectedCard }: { selectedCard: Card }) => {
 
   useEffect(() => {
     setIsFlipped(false)
-    if (selectedCard !== '') {
+    if (selectedCard !== null) {
       setShownCards([...shownCards, selectedCard])
     }
   }, [selectedCard])
@@ -29,6 +29,9 @@ export const SelectedCard = ({ selectedCard }: { selectedCard: Card }) => {
     <div>
       <div className="card-stack">
         {shownCards.map((card, cardIndex, previousCards) => {
+          if (card == null) {
+            return null
+          }
           const isLastCard = cardIndex === previousCards.length - 1
           return isLastCard ? (
             <div
@@ -63,8 +66,8 @@ const getMaxAcceleration = (acceleration: {
   return max
 }
 
-const useShake = (onShake: () => void, card: Card) => {
-  const test = useMotion()
+const useShake = (onShake: () => void, card: Card | null) => {
+  const motion = useMotion()
   const [shaking, setShaking] = useState(false)
   const [vibrate, setVibrate] = useState(false)
   // Throttle instead of debounce?
@@ -83,8 +86,8 @@ const useShake = (onShake: () => void, card: Card) => {
     300,
     [shaking, card],
   )
-  // useVibrate(false,)
-  const max = getMaxAcceleration(test?.acceleration)
+
+  const max = getMaxAcceleration(motion?.acceleration)
   if (max > 15) {
     if (!shaking) {
       setShaking(true)
