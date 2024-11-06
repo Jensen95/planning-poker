@@ -7,12 +7,15 @@ const fibonacciSequence = [0, '½', 1, 2, 3, 5, 8, 13, 21, '∞', '?']
 export const CardSelectorPanel = ({
   onCardSelection,
 }: {
-  onCardSelection: (card: Card) => void
+  onCardSelection: (card: Card | null) => void
 }) => {
   const [fullSize, setFullSize] = useState(false)
 
   const cardSelect = (card: Card) => {
-    onCardSelection(card)
+    onCardSelection(null)
+    requestAnimationFrame(() => {
+      onCardSelection(card)
+    })
     setFullSize(false)
   }
 
@@ -27,7 +30,13 @@ export const CardSelectorPanel = ({
         </button>
       </div>
       {fibonacciSequence.map((card) => (
-        <button key={card} className="card" onClick={() => cardSelect(card)}>
+        <button
+          key={card}
+          className="card"
+          onClick={() => {
+            cardSelect(card)
+          }}
+        >
           {card}
         </button>
       ))}
