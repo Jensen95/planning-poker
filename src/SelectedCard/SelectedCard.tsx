@@ -10,8 +10,8 @@ export const SelectedCard = ({ selectedCard }: { selectedCard: Card | null }) =>
   const [shownCards, setShownCards] = useState<Card[]>([])
 
   useShake(() => {
-    console.log('shake')
-    setIsFlipped((prev) => !prev)
+    // Could be a setting
+    setIsFlipped(true)
   }, selectedCard)
 
   useEffect(() => {
