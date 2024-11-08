@@ -51,10 +51,6 @@ const ShakeButton = () => {
     return null
   }
 
-  useEffect(() => {
-    onClick()
-  }, [])
-
   return <button onClick={onClick}>Shake it off?</button>
 }
 
