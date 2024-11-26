@@ -5,7 +5,7 @@
   "private": true,
   "homepage": "https://jensen95.github.io/planning-poker",
   "dependencies": {
-    "@vitejs/plugin-react": "^4.3.3",
+    "@vitejs/plugin-react": "^4.3.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-use": "^17.5.1",
